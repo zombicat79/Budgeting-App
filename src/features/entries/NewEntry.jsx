@@ -85,7 +85,7 @@ function NewEntry() {
         }));
 
         // PROJECT LOG UPDATE
-        newLogEntry = {
+        newLogEntry.assetData = {
             ...newEntry,
             parentBudget: { id: currentBudget.id, name: currentBudget.name }
         };

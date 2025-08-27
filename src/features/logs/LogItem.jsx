@@ -7,6 +7,25 @@ function LogItem({ logData }) {
     let containerClasses = "flex flex-col border px-[1rem] py-[0.5rem] gap-2 hover:cursor-pointer hover:border-teal-500 hover:animate-pulse"
     let identifierClasses = "flex justify-center items-center basis-[10%] border-2 bg-gray-500";
     let operationDetails;
+
+    function spitChangeHistory(changeLog) {
+        return (
+            <>
+            {changeLog.map((change) => {
+                return (
+                    <span key={change.key}>
+                        <span className="font-semibold italic">- {change.key.toUpperCase()} </span>
+                        <span>updated from </span>
+                        <span className="font-semibold">"{change.oldValue}" </span>
+                        <span>to </span>
+                        <span className="font-semibold">"{change.newValue}"</span>
+                        <br/>
+                    </span>
+                )
+            })}
+            </>
+        );
+    }
     
     switch(logData.assetType) {
         case "budget":
@@ -21,10 +40,10 @@ function LogItem({ logData }) {
                     // case "created"
                     operationDetails = 
                     <>
-                        <span className="font-semibold">* Created with ID: </span><span>{logData.assetData.id}</span><br/>
-                        <span className="font-semibold">* Budget named as: </span><span>{logData.assetData.name.toUpperCase()}</span><br/>
-                        <span className="font-semibold">* Allocated an amount of: </span><span>{logData.assetData.initialBalance} €</span><br/>
-                        <span className="font-semibold">* Set to cover period: </span><span>{logData.assetData.startDate} to {logData.assetData.endDate}</span>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Created with ID</span><span>: {logData.assetData.id}</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Budget named as</span><span>: {logData.assetData.name.toUpperCase()}</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Allocated an amount of</span><span>: {logData.assetData.initialBalance} €</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Set to cover period</span><span>: {logData.assetData.startDate} to {logData.assetData.endDate}</span>
                     </>
             }
             break;
@@ -33,6 +52,13 @@ function LogItem({ logData }) {
             containerClasses += " w-[80%]"
             switch(logData.actionType) {
                 case "updated":
+                    operationDetails = 
+                    <>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Entry named as</span><span>: {logData.assetData.name.toUpperCase()}</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Belongs to</span><span>: {logData.assetData.parentBudget.name.toUpperCase()} budget | ID = {logData.assetData.parentBudget.id}</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Underwent the following changes</span><span>:</span><br/>
+                        {spitChangeHistory(logData.assetData.updateDetails)}
+                    </>
                     break;
                 case "deleted":
                     break;
@@ -40,9 +66,9 @@ function LogItem({ logData }) {
                     // case "created"
                     operationDetails = 
                     <>
-                        <span className="font-semibold">* New {logData.assetData.isExpense ? 'EXPENSE' : 'INCOME' } registered: </span><span>{logData.assetData.isExpense ? '-' : ''}{logData.assetData.amount} € under the category of {logData.assetData.category.toUpperCase()}</span><br/>
-                        <span className="font-semibold">* Entry named as: </span><span>{logData.assetData.name.toUpperCase()}</span><br/>
-                        <span className="font-semibold">* Benlongs to: </span><span>{logData.assetData.parentBudget.name} budget &lpar;ID: {logData.assetData.parentBudget.id}&rpar;</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">New {logData.assetData.isExpense ? 'EXPENSE' : 'INCOME' } registered</span><span>: {logData.assetData.isExpense ? '-' : ''}{logData.assetData.amount} € under the category of {logData.assetData.category.toUpperCase()}</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Entry named as</span><span>: {logData.assetData.name.toUpperCase()}</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Belongs to</span><span>: {logData.assetData.parentBudget.name.toUpperCase()} budget | ID = {logData.assetData.parentBudget.id}</span>
                     </>
             }
             break;
@@ -56,8 +82,8 @@ function LogItem({ logData }) {
                     // case "created"
                     operationDetails = 
                     <>
-                    <span className="font-semibold">* Total amount of money to be tracked: </span><span>{logData.assetData.cashAllowance} €</span><br/>
-                    <span className="font-semibold">* Tracking window ends on: </span><span>{logData.assetData.expiryDate}</span>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Total amount of money to be tracked</span><span>: {logData.assetData.cashAllowance} €</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Tracking window ends on</span><span>: {logData.assetData.expiryDate}</span>
                     </>
             }
     }
