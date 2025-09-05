@@ -46,7 +46,7 @@ function LogItem({ logData }) {
                     <>
                         <span className="font-semibold">* </span><span className="font-semibold underline">Destroyed budget name</span><span>: {logData.assetData.name.toUpperCase()}</span><br/>
                         <span className="font-semibold">* </span><span className="font-semibold underline">Destroyed budget ID</span><span>: {logData.assetData.id}</span><br/>
-                        <span className="font-semibold">* </span><span className="font-semibold underline">Amount freed from tracking</span><span>: {logData.assetData.initialBalance} €</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Amount unlocked for further tracking</span><span>: {logData.assetData.initialBalance} €</span><br/>
                     </>
                     break;
                 default:
@@ -76,9 +76,9 @@ function LogItem({ logData }) {
                 case "deleted":
                     operationDetails = 
                     <>
-                        <span className="font-semibold">* </span><span className="font-semibold underline">Destroyed entry name</span><span>: {logData.assetData.name.toUpperCase()}</span><br/>
-                        <span className="font-semibold">* </span><span className="font-semibold underline">Belonged to</span><span>: </span><br/>
-                        <span className="font-semibold">* </span><span className="font-semibold underline">Amount freed from tracking</span><span>: {logData.assetData.initialBalance} €</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">{logData.assetData.isExpense ? 'EXPENSE' : 'INCOME' } destroyed</span><span>: {logData.assetData.isExpense ? `${logData.assetData.amount} € returned to parent budget` : `-${logData.assetData.amount} removed from parent budget`}</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Entry named as</span><span>: {logData.assetData.name.toUpperCase()}</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Belonged to</span><span>: {logData.assetData.parentBudget.name.toUpperCase()} budget | ID = {logData.assetData.parentBudget.id}</span><br/>
                     </>
                     break;
                 default:
