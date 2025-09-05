@@ -33,8 +33,21 @@ function LogItem({ logData }) {
             containerClasses += " w-[90%]"
             switch(logData.actionType) {
                 case "updated":
+                    operationDetails = 
+                    <>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Budget named as</span><span>: {logData.assetData.name.toUpperCase()}</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">ID</span><span>: {logData.assetData.id}</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Underwent the following changes</span><span>:</span><br/>
+                        {spitChangeHistory(logData.assetData.updateDetails)}
+                    </>
                     break;
                 case "deleted":
+                    operationDetails = 
+                    <>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Destroyed budget name</span><span>: {logData.assetData.name.toUpperCase()}</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Destroyed budget ID</span><span>: {logData.assetData.id}</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Amount freed from tracking</span><span>: {logData.assetData.initialBalance} €</span><br/>
+                    </>
                     break;
                 default:
                     // case "created"
@@ -61,6 +74,12 @@ function LogItem({ logData }) {
                     </>
                     break;
                 case "deleted":
+                    operationDetails = 
+                    <>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Destroyed entry name</span><span>: {logData.assetData.name.toUpperCase()}</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Belonged to</span><span>: </span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Amount freed from tracking</span><span>: {logData.assetData.initialBalance} €</span><br/>
+                    </>
                     break;
                 default:
                     // case "created"
