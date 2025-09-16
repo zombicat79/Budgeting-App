@@ -4,7 +4,7 @@ function Footer() {
     const getCurrentYear = () => new Date().getFullYear();
 
     return (
-        <footer className="flex justify-center items-center bg-cyan-700 text-white titillium-web-regular p-[2rem]">
+        <footer className="flex justify-center items-center bg-cyan-700 text-white titillium-web-regular p-[2rem] print:hidden">
             <div className="flex flex-col items-center">
                 <p>ZombieCat's Money Tracker {getCurrentYear()} - © All rights reserved</p>
                 <div className="flex flex-col">

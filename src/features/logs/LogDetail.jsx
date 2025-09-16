@@ -16,7 +16,7 @@ function LogDetail() {
 
     return (
         <section title={`A complete listing of all existing records related to the ${projectName.toUpperCase()} money tracking project`}>
-            <h3 className="mb-[2rem] font-bold text-[3rem]">{projectName.toUpperCase()} money tracking project history and action record</h3>
+            <h3 className="mb-[2rem] font-bold text-[3rem] print:text-[1.8rem]">{projectName.toUpperCase()} money tracking project history and action record</h3>
             <ul className="flex flex-col gap-[1rem] m-auto lg:w-[50%]">
             {projectLogs.map((el) => {
                 return (
@@ -26,7 +26,7 @@ function LogDetail() {
                 )
             })}
             </ul>
-            <div className="mt-[2rem]" onClick={() => print()}>
+            <div className="mt-[2rem] print:hidden" onClick={() => print()}>
                 <Button>Print</Button>
             </div>
         </section>

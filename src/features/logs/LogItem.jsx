@@ -4,8 +4,9 @@ import { capitaliseFirst } from './../../utils/conversion/string-management';
 function LogItem({ logData }) {
     const [expanded, setExpanded] = useState(false);
 
-    let containerClasses = "flex flex-col border px-[1rem] py-[0.5rem] gap-2 hover:cursor-pointer hover:border-teal-500 hover:animate-pulse"
-    let identifierClasses = "flex justify-center items-center basis-[10%] border-2 bg-gray-500";
+    let containerClasses = `flex flex-col border px-[1rem] py-[0.5rem] gap-2 hover:cursor-pointer hover:border-teal-500 hover:animate-pulse 
+        print:border-0 print:border-y print:border-dashed print:py-[1rem]`;
+    let identifierClasses = "flex justify-center items-center basis-[10%] border-2 bg-gray-500 print:hidden";
     let operationDetails;
 
     function spitChangeHistory(changeLog) {
@@ -123,9 +124,9 @@ function LogItem({ logData }) {
                         {logData.timestamp}
                     </p>
                 </div>
-                {expanded ? <p className="text-3xl">&uarr;</p> : <p className="text-3xl">&darr;</p>}
+                {expanded ? <p className="text-3xl print:hidden">&uarr;</p> : <p className="text-3xl print:hidden">&darr;</p>}
             </div>
-            {expanded && <p className="text-left">{operationDetails}</p>}
+            <p className={expanded ? "text-left" : "text-left hidden print:block"}>{operationDetails}</p>
         </div>
     )
 }
