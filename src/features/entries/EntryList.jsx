@@ -59,7 +59,7 @@ function EntryList() {
                     if (entry.id === entries[entries.length-1].id) {
                         last = true;
                     }
-                    return <EntryItem key={entry.id} entryData={entry} currentProjectName={currentProject} parentBudget={budgetId} last={last} />;
+                    return <EntryItem key={entry.id} entryData={entry} currentProjectName={currentProject} parentBudget={relevantBudget} last={last} />;
                 })}
             </ul>
 

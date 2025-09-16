@@ -16,7 +16,10 @@ function EntryItem({ entryData, currentProjectName, parentBudget, last }) {
     const dispatch =  useDispatch();
     // Log entry deletion enabling
     const newLogEntry = useLog('deleted', 'entry')
-    newLogEntry.assetData = entryData;
+    newLogEntry.assetData = {
+        ...entryData,
+        parentBudget: { name: parentBudget.name, id: parentBudget.id }
+    };
 
     const buildCSSClasses = useCallback((baseClass) => {
         let classes = baseClass;
@@ -37,7 +40,7 @@ function EntryItem({ entryData, currentProjectName, parentBudget, last }) {
             ],
             actions: [{ actionId: 1, type: 'regular', text: 'Cancel' }, { actionId: 2, type: 'danger', text: 'Confirm' }],
             tools: { setDialogShown, dispatch },
-            metadata: { itemCategory, id, parentProject: currentProjectName, parentBudget, amount, isExpense, removalPayload: newLogEntry }
+            metadata: { itemCategory, id, parentProject: currentProjectName, parentBudget: parentBudget.id, amount, isExpense, removalPayload: newLogEntry }
         }));
         setDialogShown((prev) => !prev);
     }

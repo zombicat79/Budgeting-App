@@ -1,0 +1,36 @@
+import { useParams } from "react-router";
+import { useSelector } from 'react-redux';
+
+import LogItem from "./LogItem";
+import Button from "./../../ui/Button";
+
+function LogDetail() {
+    const { projectName } = useParams();
+    const projectLogs = useSelector((store) => {
+        const allProjects = [store.projects.current, ...store.projects.past];
+        const focusProject = allProjects.find((el) => {
+            if (el.name === projectName) return el;
+        })
+        return focusProject.logs;
+    });
+
+    return (
+        <section title={`A complete listing of all existing records related to the ${projectName.toUpperCase()} money tracking project`}>
+            <h3 className="mb-[2rem] font-bold text-[3rem] print:text-[1.8rem]">{projectName.toUpperCase()} money tracking project history and action record</h3>
+            <ul className="flex flex-col gap-[1rem] m-auto lg:w-[50%]">
+            {projectLogs.map((el) => {
+                return (
+                    <li key={el.id}>
+                        <LogItem logData={el} />
+                    </li>
+                )
+            })}
+            </ul>
+            <div className="mt-[2rem] print:hidden" onClick={() => print()}>
+                <Button>Print</Button>
+            </div>
+        </section>
+    )
+}
+
+export default LogDetail;

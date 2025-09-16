@@ -10,7 +10,7 @@ function GoBack() {
         subheader.current = element;
     }, [subheader])
 
-    let classes = "fixed left-[2rem] z-10 hover:cursor-pointer";
+    let classes = "fixed left-[2rem] z-10 hover:cursor-pointer print:hidden";
     subheader.current ? classes += ' top-[16.5rem]' : classes += ' top-[9rem]';
     
     return (
