@@ -96,7 +96,13 @@ function LogItem({ logData }) {
             // case "project"
             identifierClasses += " text-yellow-300 border-yellow-300"
             switch(logData.actionType) {
-                case "deleted":
+                case "terminated":
+                    operationDetails = 
+                    <>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Number of active budgets at termination</span><span>: {logData.assetData.attachedBudgets.length}</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Amount being tracked at termination</span><span>: {logData.assetData.allocatedAllowance} €</span><br/>
+                        <span className="font-semibold">* </span><span className="font-semibold underline">Untracked amount at termination</span><span>: {logData.assetData.availableAllowance} €</span>
+                    </>
                     break;
                 default:
                     // case "created"
@@ -107,8 +113,6 @@ function LogItem({ logData }) {
                     </>
             }
     }
-
-    console.log(logData)
 
     return (
         <div className={containerClasses} onClick={() => setExpanded((prev) => !prev)}>
