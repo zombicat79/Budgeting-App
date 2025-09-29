@@ -10,6 +10,9 @@ function Button({ children, type, margin, width }) {
             case 'danger':
                 classes += " bg-red-700! hover:bg-red-400!";
                 break;
+            case 'uppercased':
+                classes += " uppercase";
+                break;
             default:
                 return;
         }
